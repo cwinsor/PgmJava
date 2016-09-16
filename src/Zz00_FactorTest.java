@@ -4,7 +4,14 @@ import java.util.HashSet;
 /**
  * Created by Chris on 9/14/2016.
  */
-public class ZzzFactorTest {
+public class Zz00_FactorTest {
+
+
+    public static void main(String[] args) {
+        System.out.println("here"); // Display the string.
+        Zz00_FactorTest t = new Zz00_FactorTest();
+        t.doTest();
+    }
 
     public void doTest() {
 
@@ -13,6 +20,9 @@ public class ZzzFactorTest {
         RandomVariableState a3 = new RandomVariableState();
         RandomVariableSpace aSpace = new RandomVariableSpace(new HashSet<RandomVariableState>(Arrays.asList(a1,a2,a3)));
         RandomVariable A  = new RandomVariable(aSpace);
+
+        System.out.println(A.toString());
+        System.out.println("here");
 
         RandomVariableState b1 = new RandomVariableState();
         RandomVariableState b2 = new RandomVariableState();
