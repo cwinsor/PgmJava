@@ -73,7 +73,9 @@ public class Zz01_CartesianProductOnSet extends LinkedHashSet {
                 Zz01_CartesianProductOnSet newOset = (Zz01_CartesianProductOnSet) newObj; // cast
 
                 // create a new one, extend with new, and add it to this
-                Zz01_CartesianProductOnSet newSingle = new Zz01_CartesianProductOnSet("blah");
+                Zz01_CartesianProductOnSet newSingle = new Zz01_CartesianProductOnSet(
+                        existingOset.getResult().concat(newOset.getResult()));
+
                 newSingle.add(existingOset);
                 newSingle.add(newOset);
                 freshSet.add(newSingle);
