@@ -1,26 +1,28 @@
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 
 /**
  * Created by Chris on 9/14/2016.
- * <p>
- * RandomVariableStateSet is the set of values that variable can take
- * More specifically - it is a set of RandomVariableState which identifies the space of a RandomVariable.
  */
 
 public class RandomVariableStateSet extends HashSet<RandomVariableState> {
 
-//    public String toString() {
-//        String outS = new String("");
-//        outS = outS.concat("{");
-//        for (Object o : this) {
-//            outS = outS.concat(" ");
-//            String foo = o.toString();
-//            outS = outS.concat(foo);
-//
-//        }
-//        outS = outS.concat("}");
-//        return outS;
-//    }
+
+    // constructor given a list of RandomVariableState
+    public RandomVariableStateSet(List<RandomVariableState> arrayList) {
+        this.addAll(arrayList);
+    }
+
+
+    public RandomVariableState get(String name) {
+
+        for (RandomVariableState s : this) {
+            if (s.equals(name)) {
+                return s;
+            }
+        }
+        return null;
+    }
 }

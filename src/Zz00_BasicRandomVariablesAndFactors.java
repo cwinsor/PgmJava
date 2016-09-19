@@ -1,12 +1,13 @@
+import java.util.Arrays;
+
 /**
  * Created by Chris on 9/14/2016.
  */
-public class Zz00_FactorTest {
+public class Zz00_BasicRandomVariablesAndFactors {
 
 
     public static void main(String[] args) {
-        System.out.println("here"); // Display the string.
-        Zz00_FactorTest t = new Zz00_FactorTest();
+        Zz00_BasicRandomVariablesAndFactors t = new Zz00_BasicRandomVariablesAndFactors();
         t.doTest();
     }
 
@@ -16,11 +17,7 @@ public class Zz00_FactorTest {
         RandomVariableState a0 = new RandomVariableState("a0");
         RandomVariableState a1 = new RandomVariableState("a1");
 
-        RandomVariableStateSet aStates = new RandomVariableStateSet();
-        aStates.add(a0);
-        aStates.add(a1);
-
-        RandomVariable A = new RandomVariable("A", aStates);
+        RandomVariable A = new RandomVariable("A", Arrays.asList(a0,a1));
         // basic functions on RandomVariable:
         // copy constructor
         RandomVariable Aprime = A.copy("Aprime");
@@ -38,10 +35,7 @@ public class Zz00_FactorTest {
         System.out.println(Aprimeprime);
 
         // now the interesting stuff - Factors
-        RandomVariableList rvl = new RandomVariableList();
-        rvl.add(A);
-        rvl.add(Aprimeprime);
-        Factor f = new Factor("f", rvl);
+        Factor f = new Factor("f", Arrays.asList(A,Aprimeprime));
 
         System.out.println(f.toString());
 
