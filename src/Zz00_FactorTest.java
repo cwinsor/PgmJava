@@ -1,6 +1,3 @@
-import java.util.Arrays;
-import java.util.HashSet;
-
 /**
  * Created by Chris on 9/14/2016.
  */
@@ -15,58 +12,77 @@ public class Zz00_FactorTest {
 
     public void doTest() {
 
-        RandomVariableState a1 = new RandomVariableState();
-        RandomVariableState a2 = new RandomVariableState();
-        RandomVariableState a3 = new RandomVariableState();
-        RandomVariableSpace aSpace = new RandomVariableSpace(new HashSet<RandomVariableState>(Arrays.asList(a1,a2,a3)));
-        RandomVariable A  = new RandomVariable(aSpace);
+        // define random variable states
+        RandomVariableState a0 = new RandomVariableState("a0");
+        RandomVariableState a1 = new RandomVariableState("a1");
 
-        System.out.println(A.toString());
-        System.out.println("here");
+        RandomVariableStateSet aStates = new RandomVariableStateSet();
+        aStates.add(a0);
+        aStates.add(a1);
 
-        RandomVariableState b1 = new RandomVariableState();
-        RandomVariableState b2 = new RandomVariableState();
-        RandomVariableSpace bSpace = new RandomVariableSpace(new HashSet<RandomVariableState>(Arrays.asList(b1,b2)));
-        RandomVariable B  = new RandomVariable(bSpace);
+        RandomVariable A = new RandomVariable("A", aStates);
+        // basic functions on RandomVariable:
+        // copy constructor
+        RandomVariable Aprime = A.copy("Aprime");
+        // equals
+        System.out.println(A.equals(A)); // returns true
+        System.out.println(A.equals(Aprime)); // returns false
+        // get the space and create a new random variable using that
+        RandomVariable Aprimeprime = new RandomVariable("Aprimeprime", A.getSpace());
+        //        Aprimeprime.setState(a1);
+        System.out.println(A.equals(Aprimeprime)); // returns false
 
-        RandomVariableState c1 = new RandomVariableState();
-        RandomVariableState c2 = new RandomVariableState();
-        RandomVariableSpace cSpace = new RandomVariableSpace(new HashSet<RandomVariableState>(Arrays.asList(c1,c2)));
-        RandomVariable C  = new RandomVariable(cSpace);
+        //   System.out.println("------------");
+        System.out.println(A);
+        System.out.println(Aprime);
+        System.out.println(Aprimeprime);
 
-        // for testing purposes...
-        Factor f1, f2, f3;
-        RandomVariableSpace e;
+        // now the interesting stuff - Factors
+        RandomVariableList rvl = new RandomVariableList();
+        rvl.add(A);
+        rvl.add(Aprimeprime);
+        Factor f = new Factor("f", rvl);
 
-        // reduce ...
+        System.out.println(f.toString());
 
-        // reduce specifying a single value of one of the random variables
-        // this should result in only that value in the result for that variable
-        f1 = new Factor(new HashSet<RandomVariable>(Arrays.asList(A,B,C)));
-        e = new RandomVariableSpace(new HashSet<RandomVariableState>(Arrays.asList(c1)));
-        f2 = f1.reduce(e);
 
-        // reduce specifying two values for one of the random variables
-        // this should result in both of those values in the result
-        e = new RandomVariableSpace(new HashSet<RandomVariableState>(Arrays.asList(b1,b2)));
-        f2 = f1.reduce(e);
 
-        // reduce specifying values for two different random variables
-        // this should result in reduction for both random variables
-        e = new RandomVariableSpace(new HashSet<RandomVariableState>(Arrays.asList(b1,b2,c1)));
-        f2 = f1.reduce(e);
 
-        // marginalize ...
 
-        // marginalize out specifying one random variable
-        f1 = new Factor(new HashSet<RandomVariable>(Arrays.asList(A,B,C)));
-        f2 = f1.marginalizeOut(aSpace);
-        // repeat to marginalize out additional variables
-        f2 = f2.marginalizeOut(bSpace);
 
-        // product
-        f1 = new Factor(new HashSet<RandomVariable>(Arrays.asList(A,B)));
-        f2 = new Factor(new HashSet<RandomVariable>(Arrays.asList(B,C)));
-        f3 = f1.product(f2);
+        /*
+        RandomVariableStateSet bSpace = new RandomVariableStateSet();
+        bSpace.add(b0);
+        bSpace.add(b1);
+        bSpace.add(b2);
+
+        // create instances of random variables
+        RandomVariable A = new RandomVariable(aSpace);
+        RandomVariable Aprime = new RandomVariable(aSpace);
+
+        // create a random variable (a special case of a Factor_Definition which has a single space)
+        Factor_Definition f = new Factor_Definition("f"); // a single-variable factor aka a Random Variable
+f.add(A);
+
+        Factor_Definition f2 = new Factor_Definition("f2");
+
+
+
+        f.add(aSpace);
+
+        // operations on random variables
+        System.out.println(A.equals(Aprime));  // returns false
+        System.out.println(A.equals(A));      // returns true
+
+        A.get(
+
+        // operations on a space
+        // because it is a "set"
+        // .add
+        // .addAll
+
+
+                RandomVariableStateSet bSpace = aSpace.cartesianProduct(aSpace));  // same as
+*/
     }
 }
