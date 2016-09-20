@@ -1,6 +1,4 @@
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by Chris on 9/14/2016.
@@ -24,20 +22,13 @@ public class Factor {
         this.list = new RandomVariableList(arrayList);
     }
 
-    public RandomVariable rvNamed(String name) {
-        return list.named(name);
+    public RandomVariable getRv(String name) {
+        return list.get(name);
     }
 
     public String toString() {
-        String out = new String("-- Factor ");
-        out = out.concat(name).concat(" --");
-
-        for (RandomVariable v : list) {
-            out = out.concat("\n");
-            out = out.concat(v.toString());
-        }
-
-        out = out.concat("\n");
+        String out = new String("-- Factor ").concat(name).concat(":");
+        out = out.concat(list.toString());
         return out;
     }
 

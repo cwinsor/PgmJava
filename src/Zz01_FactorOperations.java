@@ -19,6 +19,8 @@ public class Zz01_FactorOperations {
         RandomVariableState a3 = new RandomVariableState("a3");
         RandomVariable A = new RandomVariable("A", Arrays.asList(a1, a2, a3));
         System.out.println(A.toString());
+        RandomVariableStateSet rvss = A.getSpace();
+        System.out.println(A.getSpace().get("a2").toString());
 
         // in case we need to get the states or space...
         A.getSpace().get("a1");
@@ -38,8 +40,9 @@ public class Zz01_FactorOperations {
         Factor f = new Factor("f", Arrays.asList(A, B, C));
         System.out.println(f.toString());
 
-        RandomVariable tempRv = f.rvNamed("A");
-        ///f.reduce(f.rvNamed("A"));
+        RandomVariable tempRv = f.getRv("A");
+//        f.reduce(new RandomVariableStateSet(Arrays.asList(c1)));
+
 
 
     }

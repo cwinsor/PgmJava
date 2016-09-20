@@ -37,6 +37,10 @@ public class RandomVariable {
         return out;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public RandomVariableStateSet getSpace() {
         return this.space;
     }
@@ -55,21 +59,8 @@ public class RandomVariable {
     //  }
 
     public String toString() {
-        String out = new String("---- Random Variable ");
-        out = out.concat(name);
-        //    out = out.concat(" state=");
-        //    if (this.state != null) {
-        //        out = out.concat(this.state.toString());
-        //    } else {
-        //        out = out.concat("null");
-        //    }
-
-        out = out.concat(" space=");
-        if (this.space != null) {
-            out = out.concat(this.space.toString());
-        } else {
-            out = out.concat("null");
-        }
+        String out = new String("-- Random Variable: ").concat(name).concat(":");
+        out = out.concat(space.toString());
         return out;
     }
 }

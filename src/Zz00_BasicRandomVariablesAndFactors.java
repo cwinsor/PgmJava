@@ -29,7 +29,6 @@ public class Zz00_BasicRandomVariablesAndFactors {
         //        Aprimeprime.setState(a1);
         System.out.println(A.equals(Aprimeprime)); // returns false
 
-        //   System.out.println("------------");
         System.out.println(A);
         System.out.println(Aprime);
         System.out.println(Aprimeprime);

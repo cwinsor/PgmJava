@@ -8,7 +8,13 @@ public class RandomVariableState {
     public RandomVariableState(String name) {
         this.name = name;
     }
-    public String toString() {
+
+    public String getName() {
         return name;
+    }
+
+    public String toString() {
+        String out = new String("state: ").concat(name);
+        return out;
     }
 }
