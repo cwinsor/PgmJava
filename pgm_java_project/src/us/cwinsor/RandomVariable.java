@@ -1,13 +1,12 @@
-import java.util.HashSet;
-import java.util.Iterator;
+package us.cwinsor;
+
 import java.util.List;
 
 /**
- * Created by Chris on 9/14/2016.
- * RandomVariable has a space and a state.
- * Space is the definition of the set of values the RandomVariable can take.
- * State is a subset of this - the values the random variable currently can take.
- * The space is identified upon construction (passed in as parameter) and immutable.
+ * Created by Chris on 9/14/2016. RandomVariable has a space and a state. Space
+ * is the definition of the set of values the RandomVariable can take. State is
+ * a subset of this - the values the random variable currently can take. The
+ * space is identified upon construction (passed in as parameter) and immutable.
  * That state can be modified by calls to setter.
  */
 public class RandomVariable {
@@ -18,14 +17,14 @@ public class RandomVariable {
 
     // constructor
     public RandomVariable(String name,
-                          RandomVariableStateSet space) {
+            RandomVariableStateSet space) {
         this.name = name;
         this.space = space;
     }
 
     // constructor
     public RandomVariable(String name,
-                          List<RandomVariableState> arrayList) {
+            List<RandomVariableState> arrayList) {
         this.name = name;
         this.space = new RandomVariableStateSet(arrayList);
     }
@@ -45,19 +44,7 @@ public class RandomVariable {
         return this.space;
     }
 
-
-    //    public void setState(RandomVariableStateSet s) {
-    //        state = s;
-    //    }
-
-    //   public RandomVariableStateSet getSpace() {
-    //        return space;
-    //    }
-
-    //  public RandomVariableStateSet getState() {
-    //      return state;
-    //  }
-
+    @Override
     public String toString() {
         String out = new String("-- Random Variable: ").concat(name).concat(":");
         out = out.concat(space.toString());

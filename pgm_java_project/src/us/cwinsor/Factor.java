@@ -1,3 +1,5 @@
+package us.cwinsor;
+
 import java.util.List;
 
 /**
@@ -10,14 +12,14 @@ public class Factor {
 
     // constructor
     public Factor(String name,
-                  RandomVariableList list) {
+            RandomVariableList list) {
         this.name = name;
         this.list = list;
     }
 
     // constructor
     public Factor(String name,
-                  List<RandomVariable> arrayList) {
+            List<RandomVariable> arrayList) {
         this.name = name;
         this.list = new RandomVariableList(arrayList);
     }
@@ -26,6 +28,7 @@ public class Factor {
         return list.get(name);
     }
 
+    @Override
     public String toString() {
         String out = new String("-- Factor ").concat(name).concat(":\n");
         out = out.concat(list.toString());

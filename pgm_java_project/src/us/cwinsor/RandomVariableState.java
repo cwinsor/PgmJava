@@ -1,3 +1,5 @@
+package us.cwinsor;
+
 /**
  * Created by Chris on 9/15/2016.
  */
@@ -13,6 +15,7 @@ public class RandomVariableState {
         return name;
     }
 
+    @Override
     public String toString() {
         String out = new String("state: ").concat(name);
         return out;
