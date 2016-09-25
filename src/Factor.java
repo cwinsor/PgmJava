@@ -27,7 +27,7 @@ public class Factor {
     }
 
     public String toString() {
-        String out = new String("-- Factor ").concat(name).concat(":");
+        String out = new String("-- Factor ").concat(name).concat(":\n");
         out = out.concat(list.toString());
         return out;
     }

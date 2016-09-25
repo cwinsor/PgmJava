@@ -3,11 +3,11 @@ import java.util.Arrays;
 /**
  * Created by Chris on 9/14/2016.
  */
-public class Zz00_BasicRandomVariablesAndFactors {
+public class Zz00_TestRandomVariables {
 
 
     public static void main(String[] args) {
-        Zz00_BasicRandomVariablesAndFactors t = new Zz00_BasicRandomVariablesAndFactors();
+        Zz00_TestRandomVariables t = new Zz00_TestRandomVariables();
         t.doTest();
     }
 
@@ -22,12 +22,19 @@ public class Zz00_BasicRandomVariablesAndFactors {
         // copy constructor
         RandomVariable Aprime = A.copy("Aprime");
         // equals
-        System.out.println(A.equals(A)); // returns true
-        System.out.println(A.equals(Aprime)); // returns false
-        // get the space and create a new random variable using that
+        assert(A.equals(A)); // check
+        assert(!A.equals(Aprime)); // should not equal
+
+        // get a random variable state by name
+        RandomVariableState aSpaceA0State = A.getSpace().get("a1");
+        System.out.println(aSpaceA0State.toString());
+        /// get the space
+        RandomVariableStateSet aSpace = A.getSpace();
+        System.out.println(aSpace.toString());
+
+        // create a new random variable using a space
         RandomVariable Aprimeprime = new RandomVariable("Aprimeprime", A.getSpace());
-        //        Aprimeprime.setState(a1);
-        System.out.println(A.equals(Aprimeprime)); // returns false
+        assert(!A.equals(Aprimeprime)); // check
 
         System.out.println(A);
         System.out.println(Aprime);

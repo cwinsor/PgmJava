@@ -15,9 +15,9 @@ public class RandomVariableList extends HashMap<String,RandomVariable> {
         }
     }
 
-    public RandomVariable get(String name) {
-        return this.get(name);
-    }
+//    public RandomVariable get(String name) {
+//        return this.get(name);
+//    }
 
 //    public String toString() {
 //

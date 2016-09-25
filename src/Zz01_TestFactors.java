@@ -3,11 +3,11 @@ import java.util.Arrays;
 /**
  * Created by Chris on 9/14/2016.
  */
-public class Zz01_FactorOperations {
+public class Zz01_TestFactors {
 
 
     public static void main(String[] args) {
-        Zz01_FactorOperations t = new Zz01_FactorOperations();
+        Zz01_TestFactors t = new Zz01_TestFactors();
         t.doTest();
     }
 
@@ -18,15 +18,6 @@ public class Zz01_FactorOperations {
         RandomVariableState a2 = new RandomVariableState("a2");
         RandomVariableState a3 = new RandomVariableState("a3");
         RandomVariable A = new RandomVariable("A", Arrays.asList(a1, a2, a3));
-        System.out.println(A.toString());
-        RandomVariableStateSet rvss = A.getSpace();
-        System.out.println(A.getSpace().get("a2").toString());
-
-        // in case we need to get the states or space...
-        A.getSpace().get("a1");
-        RandomVariableStateSet aSpace = A.getSpace();
-        System.out.println(aSpace.toString());
-       // RandomVariableStateSet aState = A.getState();
 
         RandomVariableState b1 = new RandomVariableState("b1");
         RandomVariableState b2 = new RandomVariableState("b2");
@@ -36,11 +27,17 @@ public class Zz01_FactorOperations {
         RandomVariableState c2 = new RandomVariableState("c2");
         RandomVariable C = new RandomVariable("C", Arrays.asList(c1, c2));
 
+        System.out.println(A.toString());
+        System.out.println(B.toString());
+        System.out.println(C.toString());
+
         // Factor
         Factor f = new Factor("f", Arrays.asList(A, B, C));
         System.out.println(f.toString());
 
-        RandomVariable tempRv = f.getRv("A");
+        // get a random variable using its name
+        RandomVariable f2 = f.getRv("A");
+// create a ran
 //        f.reduce(new RandomVariableStateSet(Arrays.asList(c1)));
 
 

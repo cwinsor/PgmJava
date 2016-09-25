@@ -14,9 +14,9 @@ public class RandomVariableStateSet extends HashMap<String, RandomVariableState>
         }
     }
 
-    public RandomVariableState get(String name) {
-        return this.get(name);
-    }
+   // public RandomVariableState get(String name) {
+   //     return this.toString();
+   // }
 
 //    public String toString() {
 //        String out = new String("");
