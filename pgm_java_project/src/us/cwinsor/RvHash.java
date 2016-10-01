@@ -5,6 +5,7 @@ import java.util.*;
 /**
  * Created by Chris on 9/14/2016. A list of RandomVariable
  */
+/*
 public class RvHash extends HashMap {
 
     // constructor given a list of RandomVariable
@@ -22,3 +23,4 @@ public class RvHash extends HashMap {
     }
 
 }
+*/

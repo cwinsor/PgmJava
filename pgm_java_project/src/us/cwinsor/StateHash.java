@@ -10,8 +10,8 @@ public class StateHash extends HashMap implements Comparable {
 
     // constructor given a list of RandomVariableState
     public StateHash(List<State> list) {
-        for (State statee : list) {
-            this.put(statee.getName(), statee);
+        for (State state : list) {
+            this.put(state.getName(), state);
         }
     }
 

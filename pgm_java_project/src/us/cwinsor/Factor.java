@@ -40,6 +40,9 @@ public class Factor {
             result.put(sh, 0.0);
         }
         total = 0.0;
+        
+        
+      
     }
 
     // scope
@@ -159,7 +162,7 @@ public class Factor {
     /* conditionOn is a method which reduces a factor to
     include only cases where the conditioned variable has the value
     specified.
-   conditioningOn is a specific case of the more general reduceKeeping method.
+   conditionOn is a specific case of the more general reduceKeeping method.
     */
     public Factor conditionOn(State state) {
         return reduceKeeping(new ArrayList(Arrays.asList(state)));
