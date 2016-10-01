@@ -3,7 +3,7 @@ package us.cwinsor;
 /**
  * Created by Chris on 9/15/2016.
  */
-public class State {
+public class State implements Comparable {
 
     private String name;
 
@@ -20,5 +20,10 @@ public class State {
 //        String out = new String("state: ").concat(name);
 //        return out;
         return getName();
+    }
+
+    public int compareTo(Object o) {
+        State that = (State) o;
+        return this.toString().compareTo(that.toString());
     }
 }

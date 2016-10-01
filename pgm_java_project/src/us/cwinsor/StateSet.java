@@ -6,24 +6,39 @@ import java.util.*;
 /**
  * Created by Chris on 9/14/2016.
  */
-public class StateHash extends HashMap implements Comparable {
+//public class StateHash extends HashMap implements Comparable {
+public class StateSet extends TreeSet implements Comparable {
 
     // constructor given a list of RandomVariableState
-    public StateHash(List<State> list) {
-        for (State state : list) {
-            this.put(state.getName(), state);
-        }
+    public StateSet(List<State> list) {
+        this.addAll(list);
+//        for (State state : list) {
+//            this.add(state);
+//            // this.put(state.getName(), state);
+//        }
     }
 
     // empty constructor
-    public StateHash() {
+    public StateSet() {
         super();
     }
 
-    @Override
-    public String toString() {
-        return this.values().toString();
+    // for purposes of sorting here is the compareTo
+    // given this and that StateHash, we get the keyset (set of names)
+    // for each.  We sort the keys within
+    // each set, and then compare them as strings
+    public int compareTo(Object o) {
+        StateSet that = (StateSet) o;
+        return this.toString().compareTo(that.toString());
     }
+}
+
+/*
+//    @Override
+    public String toString() {
+      return this.values().toString();
+    }
+
 
     // for purposes of sorting here is the compareTo
     // given this and that StateHash, we get the keyset (set of names)
@@ -40,4 +55,4 @@ public class StateHash extends HashMap implements Comparable {
 
         return thisList.toString().compareTo(thatList.toString());
     }
-}
+ */

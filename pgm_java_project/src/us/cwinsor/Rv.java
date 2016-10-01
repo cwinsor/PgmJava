@@ -11,13 +11,13 @@ import java.util.List;
  */
 public class Rv {
 
-    private StateHash space;
+    private StateSet space;
     //private RandomVariableStateSet state;
     private String name;
 
     // constructor
     public Rv(String name,
-            StateHash space) {
+            StateSet space) {
         this.name = name;
         this.space = space;
     }
@@ -26,7 +26,7 @@ public class Rv {
     public Rv(String name,
             List<State> arrayList) {
         this.name = name;
-        this.space = new StateHash(arrayList);
+        this.space = new StateSet(arrayList);
     }
 
     // copy constructor
@@ -40,7 +40,7 @@ public class Rv {
         return name;
     }
 
-    public StateHash getStateHash() {
+    public StateSet getStateHash() {
         return this.space;
     }
 

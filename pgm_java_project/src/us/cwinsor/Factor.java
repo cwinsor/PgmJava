@@ -14,18 +14,18 @@ import java.util.Set;
 public class Factor {
 
     private String name;
-    private HashMap<StateHash, Double> result;
+    private HashMap<StateSet, Double> result;
     private Double total;
 
     // get the hash
-    public HashMap<StateHash, Double> hashMap() {
+    public HashMap<StateSet, Double> hashMap() {
         return this.result;
     }
 
     // constructor
     public Factor(String name) {
         this.name = name;
-        this.result = new HashMap<StateHash, Double>();
+        this.result = new HashMap<StateSet, Double>();
     }
 
     // constructor
@@ -33,16 +33,14 @@ public class Factor {
             List<Rv> rvList) {
 
         this.name = name;
-        this.result = new HashMap<StateHash, Double>();
+        this.result = new HashMap<StateSet, Double>();
 
-        List<StateHash> out = rvListToStateHashList(rvList);
-        for (StateHash sh : out) {
+        List<StateSet> out = rvListToStateHashList(rvList);
+        for (StateSet sh : out) {
             result.put(sh, 0.0);
         }
         total = 0.0;
-        
-        
-      
+
     }
 
     // scope
@@ -56,12 +54,11 @@ public class Factor {
     // The method returns:
     //   ?? a list of RvHashrandom variables(?) and their values (a RvHash)
     //   ?? a list of States <------
-    
     // given a list of Rv - returns a list of StateHash
-    public List<StateHash> rvListToStateHashList(List<Rv> rvList) {
+    public List<StateSet> rvListToStateHashList(List<Rv> rvList) {
         List<State> stateList = new ArrayList<State>();
         List<State> accum = new ArrayList<State>();
-        List<StateHash> out = new ArrayList<StateHash>();
+        List<StateSet> out = new ArrayList<StateSet>();
         recurseOn(rvList, stateList, accum, out);
         return out;
     }
@@ -70,7 +67,7 @@ public class Factor {
             List<Rv> rvList,
             List<State> stateList,
             List<State> accum,
-            List<StateHash> out) {
+            List<StateSet> out) {
 
         //System.out.println();
         //System.out.format("    entering with rv list = %s\n", rvList);
@@ -88,8 +85,8 @@ public class Factor {
             localRvList.remove(rv);
 
             // iterate through the states of this rv
-            StateHash sh = rv.getStateHash();
-            Iterator it2 = sh.entrySet().iterator();
+            StateSet sh = rv.getStateHash();
+            Iterator it2 = sh.iterator();
             while (it2.hasNext()) {
                 Map.Entry pair2 = (Map.Entry) it2.next();
                 String name2 = (String) pair2.getKey();
@@ -111,10 +108,8 @@ public class Factor {
             }
             // if this call is the leaf
         } else {
-            StateHash sh = new StateHash();
-            for (State s : accum) {
-                sh.put(s.getName(), s);
-            }
+            StateSet sh = new StateSet();
+            sh.addAll(accum);
             out.add(sh);
         }
     }
@@ -130,23 +125,23 @@ public class Factor {
 //    public RvHash getRvList() {
 //        return this.rvHash;
 //    }
-    public void takeSample(StateHash rvSS, Double reslt) {
+    public void takeSample(StateSet rvSS, Double reslt) {
         this.result.put(rvSS, reslt);
     }
 
-    public void addResult(StateHash rvStateList, Double reslt) {
+    public void addResult(StateSet rvStateList, Double reslt) {
         this.result.put(rvStateList, reslt);
     }
 
-    public Double getResult(StateHash rvStateList) {
+    public Double getResult(StateSet rvStateList) {
         return result.get(rvStateList);
     }
 
     @Override
     public String toString() {
         String out = new String("-- Factor ").concat(name).concat(":\n");
-        for (StateHash key : result.keySet()) {
-           out = out.concat(key.toString()).concat(" ").concat(result.get(key).toString()).concat("\n");
+        for (StateSet key : result.keySet()) {
+            out = out.concat(key.toString()).concat(" ").concat(result.get(key).toString()).concat("\n");
         }
         return out;
     }
@@ -163,10 +158,11 @@ public class Factor {
     include only cases where the conditioned variable has the value
     specified.
    conditionOn is a specific case of the more general reduceKeeping method.
-    */
+     */
     public Factor conditionOn(State state) {
         return reduceKeeping(new ArrayList(Arrays.asList(state)));
-            }
+    }
+
     /*
     given an include list of RandomVariableState
     want to return a new Factor which is a subset
@@ -184,14 +180,14 @@ public class Factor {
         Iterator it = set.iterator();
         while (it.hasNext()) {
             Map.Entry pair = (Map.Entry) it.next();
-            StateHash haystackRvss = (StateHash) pair.getKey();
+            StateSet haystackRvss = (StateSet) pair.getKey();
             Double haystackResult = (Double) pair.getValue();
 
             // the needle
             Iterator it2 = includeStateList.iterator();
             while (it2.hasNext()) {
                 State rvs = (State) it2.next();
-                if (haystackRvss.containsKey(rvs)) {
+                if (haystackRvss.contains(rvs)) {
                     newFactor.addResult(haystackRvss, haystackResult);
                 }
             }
