@@ -9,29 +9,29 @@ import java.util.List;
  * space is identified upon construction (passed in as parameter) and immutable.
  * That state can be modified by calls to setter.
  */
-public class RandomVariable {
+public class Rv {
 
-    private RandomVariableStateSet space;
+    private StateHash space;
     //private RandomVariableStateSet state;
     private String name;
 
     // constructor
-    public RandomVariable(String name,
-            RandomVariableStateSet space) {
+    public Rv(String name,
+            StateHash space) {
         this.name = name;
         this.space = space;
     }
 
     // constructor
-    public RandomVariable(String name,
-            List<RandomVariableState> arrayList) {
+    public Rv(String name,
+            List<State> arrayList) {
         this.name = name;
-        this.space = new RandomVariableStateSet(arrayList);
+        this.space = new StateHash(arrayList);
     }
 
     // copy constructor
-    public RandomVariable copy(String name) {
-        RandomVariable out = new RandomVariable(name, this.space);
+    public Rv copy(String name) {
+        Rv out = new Rv(name, this.space);
         out.name = name;
         return out;
     }
@@ -40,7 +40,7 @@ public class RandomVariable {
         return name;
     }
 
-    public RandomVariableStateSet getSpace() {
+    public StateHash getStateHash() {
         return this.space;
     }
 
